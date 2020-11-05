@@ -8,7 +8,7 @@ const DataContextProvider = ({ children }) => {
 
   useEffect(() => {
     (async () => {
-      const response = await fetch(`${origin}/dist/data/data.json`);
+      const response = await fetch(`${origin}/data/data.json`);
       const result = await response.json();
       setData(result.rooms);
     })();
