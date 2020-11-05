@@ -1,1 +1,0 @@
-{"version":3,"sources":["montserrat.css"],"names":[],"mappings":"AAAA,WACI,sBAAyB,CACzB,6CACF","file":"App.d7db9e94.css","sourceRoot":"..\\src","sourcesContent":["@font-face {\r\n    font-family: 'Montserrat';\r\n    src:  url(\"./Montserrat/Montserrat-Regular.ttf\");\r\n  }"]}
