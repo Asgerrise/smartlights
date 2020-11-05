@@ -43,7 +43,7 @@ const Button = ({
 
   return (
     <button css={style}>
-      <img src={icon} alt={text} />
+      <img src={`../${icon}`} alt={text} />
       {text}
     </button>
   );

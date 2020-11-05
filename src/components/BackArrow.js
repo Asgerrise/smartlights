@@ -16,7 +16,7 @@ const BackArrow = () => {
 
   return (
     <button css={style} onClick={() => window.history.back()}>
-      <img src={arrow} alt="Arrow" />
+      <img src={`../${arrow}`} alt="Arrow" />
     </button>
   );
 };

@@ -20,7 +20,7 @@ const OffBtn = () => {
 
   return (
     <div css={style} className="offBtn">
-      <img src={offButton} alt="Off Button" />
+      <img src={`../${offButton}`} alt="Off Button" />
     </div>
   );
 };

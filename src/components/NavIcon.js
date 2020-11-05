@@ -6,7 +6,7 @@ import { Link } from "@reach/router";
 const NavIcon = ({ path, icon, alt }) => {
   return (
     <Link to={path ? path : "/"}>
-      <img src={icon} alt={alt} />
+      <img src={`../${icon}`} alt={alt} />
     </Link>
   );
 };

@@ -81,7 +81,7 @@ const IntensityRange = ({ room }) => {
 
   return (
     <div css={style}>
-      <img src={bulbOff} alt="Lightbulb turned off" />
+      <img src={`../${bulbOff}`} alt="Lightbulb turned off" />
       <div className="input-container">
         <input
           value={opacityValue * 100}
@@ -104,7 +104,7 @@ const IntensityRange = ({ room }) => {
           <span></span>
         </div>
       </div>
-      <img src={bulbOn} alt="Lightbulb turned on" />
+      <img src={`../${bulbOn}`} alt="Lightbulb turned on" />
     </div>
   );
 };
