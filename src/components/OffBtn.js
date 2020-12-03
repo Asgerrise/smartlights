@@ -1,10 +1,42 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
+import { useEffect, useState } from "react";
 
 import offButton from "../img/offButton.svg";
 
-const OffBtn = () => {
+const OffBtn = ({ lights }) => {
+  const [power, setPower] = useState(null);
+  const [powerData, setPowerData] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      const response = await fetch(
+        `http://192.168.8.100/api/MDGKTPf0CyfrXTNEF1Frik2qjA8xZ-qAIhC-fzLr/lights/${lights[0]}/`
+      );
+      const result = await response.json();
+      setPowerData(result);
+    })();
+  }, [lights]);
+
+  useEffect(() => {
+    powerData && setPower(powerData.state.on);
+  }, [powerData]);
+
+  useEffect(() => {
+    powerData &&
+      fetch(
+        `http://192.168.8.100/api/MDGKTPf0CyfrXTNEF1Frik2qjA8xZ-qAIhC-fzLr/lights/${lights[0]}/state`,
+        {
+          method: "PUT",
+          body: JSON.stringify({
+            on: power,
+          }),
+        }
+      );
+  }, [lights, power, powerData]);
+
   const style = css`
+    border: none;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -19,9 +51,15 @@ const OffBtn = () => {
   `;
 
   return (
-    <div css={style} className="offBtn">
+    <button
+      css={style}
+      className="offBtn"
+      onClick={() => {
+        setPower(!power);
+      }}
+    >
       <img src={`../${offButton}`} alt="Off Button" />
-    </div>
+    </button>
   );
 };
 

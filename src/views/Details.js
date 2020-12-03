@@ -17,10 +17,20 @@ import { dataContext } from "../contexts/DataContext";
 const Details = ({ id }) => {
   const { data } = useContext(dataContext);
   const [loading, setLoading] = useState(true);
+  const [lights, setLights] = useState([]);
 
   useEffect(() => {
     data && setLoading(false);
-  }, [data]);
+    if (id == 1) {
+      setLights([13, 1]);
+    } else if (id == 2) {
+      setLights([2]);
+    } else if (id == 3) {
+      setLights([15]);
+    } else if (id == 0) {
+      setLights([16]);
+    }
+  }, [data, id, lights[0]]);
 
   return loading ? (
     <h1>Loading...</h1>
@@ -37,14 +47,14 @@ const Details = ({ id }) => {
           pathname={id}
         />
         <ContentBg>
-          <OffBtn />
+          <OffBtn lights={lights} />
           <Section>
             <Title text="Intensity" color="#002D67" margin="1.3em" />
-            <IntensityRange room={data[id].name} />
+            <IntensityRange room={data[id].name} lights={lights} />
           </Section>
           <Section>
             <Title text="Colors" color="#002D67" margin="1.3em" />
-            <ColorsSelector roomColor={data[id].name} />
+            <ColorsSelector roomColor={data[id].name} lights={lights} />
           </Section>
           <Section noMargin>
             <Title text="Scenes" color="#002D67" margin="1.3em" />

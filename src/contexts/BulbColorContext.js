@@ -3,7 +3,7 @@ import React, { useState, createContext } from "react";
 export const BulbColorContext = createContext();
 
 const BulbColorContextProvider = ({ children }) => {
-  const [color, setColor] = useState("#ffd139");
+  const [color, setColor] = useState("hsl(41, 69%, 75%)");
   const [opacity, setOpacity] = useState(1);
   return (
     <BulbColorContext.Provider

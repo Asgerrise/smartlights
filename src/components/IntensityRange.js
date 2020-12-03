@@ -1,13 +1,14 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
-import { useContext } from "react";
+import { useContext, useEffect, useCallback } from "react";
+import { throttle } from "lodash";
 
 import { BulbColorContext } from "../contexts/BulbColorContext";
 
 import bulbOff from "../img/bulbOff.svg";
 import bulbOn from "../img/bulbOn.svg";
 
-const IntensityRange = ({ room }) => {
+const IntensityRange = ({ room, lights }) => {
   const { opacityContext } = useContext(BulbColorContext);
   const [opacityValue, setOpacityValue] = opacityContext;
 
@@ -79,6 +80,26 @@ const IntensityRange = ({ room }) => {
     }
   `;
 
+  const changeFunction = (e) => {
+    localStorage.setItem(room + " brightness", e.target.value / 100);
+    setOpacityValue(e.target.value / 100);
+  };
+
+  const throttleChange = useCallback(throttle(changeFunction, 100), []);
+
+  useEffect(() => {
+    fetch(
+      `http://192.168.8.100/api/MDGKTPf0CyfrXTNEF1Frik2qjA8xZ-qAIhC-fzLr/lights/${lights[0]}/state`,
+      {
+        method: "PUT",
+        body: JSON.stringify({
+          transitiontime: 1,
+          bri: Math.floor(localStorage.getItem(room + " brightness") * 254),
+        }),
+      }
+    );
+  }, [opacityValue, room, lights]);
+
   return (
     <div css={style}>
       <img src={`../${bulbOff}`} alt="Lightbulb turned off" />
@@ -91,8 +112,8 @@ const IntensityRange = ({ room }) => {
           min="0"
           max="100"
           onChange={(e) => {
-            localStorage.setItem(room + " brightness", e.target.value / 100);
-            setOpacityValue(e.target.value / 100);
+            e.persist();
+            throttleChange(e);
           }}
         />
         <div className="marks">

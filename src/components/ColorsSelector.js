@@ -4,31 +4,50 @@ import { useEffect, useState } from "react";
 
 import ColorCircle from "./ColorCircle";
 
-const ColorsSelector = ({ roomColor }) => {
+const ColorsSelector = ({ roomColor, lights }) => {
   const [colorMargin, setColorMargin] = useState(false);
   const colors = [
     {
-      color: "#FF9B9B",
+      color: "hsl(0, 100%, 80%)",
+      hue: 0,
+      sat: 254,
+      bright: 203,
       margin: !colorMargin ? 0 : "calc(10vw - 25px)",
-    },
-    {
-      color: "#94EB9E",
       storage: roomColor,
     },
     {
-      color: "#94CAEB",
+      color: "hsl(127, 69%, 75%)",
+      hue: 127,
+      sat: 175,
+      bright: 190,
       storage: roomColor,
     },
     {
-      color: "#A594EB",
+      color: "hsl(203, 69%, 75%)",
+      hue: 203,
+      sat: 175,
+      bright: 190,
       storage: roomColor,
     },
     {
-      color: "#DE94EB",
+      color: "hsl(252, 69%, 75%)",
+      hue: 252,
+      sat: 175,
+      bright: 190,
       storage: roomColor,
     },
     {
-      color: "#EBD094",
+      color: "hsl(291, 69%, 75%)",
+      hue: 291,
+      sat: 175,
+      bright: 190,
+      storage: roomColor,
+    },
+    {
+      color: "hsl(41, 69%, 75%)",
+      hue: 41,
+      sat: 175,
+      bright: 190,
       storage: roomColor,
     },
     {
@@ -59,6 +78,10 @@ const ColorsSelector = ({ roomColor }) => {
           plus={circle.icon && circle.icon}
           margin={circle.margin ? circle.margin : colorMargin}
           storage={circle.storage}
+          hue={circle.hue}
+          sat={circle.sat}
+          bright={circle.bright}
+          lights={lights}
         />
       ))}
     </ul>

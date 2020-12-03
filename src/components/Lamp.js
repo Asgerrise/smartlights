@@ -14,7 +14,13 @@ const Lamp = ({ top, id }) => {
   useEffect(() => {
     setColorValue(
       localStorage.getItem(data[id].name)
-        ? localStorage.getItem(data[id].name)
+        ? `hsl(${localStorage.getItem(
+            data[id].name + "Hue"
+          )}, ${localStorage.getItem(data[id].name + "Sat")}%, ${
+            localStorage.getItem(data[id].name + " brightness")
+              ? localStorage.getItem(data[id].name + " brightness") * 80
+              : "80"
+          }%)`
         : colorValue
     );
     setOpacityValue(
